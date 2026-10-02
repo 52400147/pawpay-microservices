@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>PawPay - Quản lý User</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; background: #f4f6f9; }
+        h2 { color: #333; }
+        table { width: 100%; border-collapse: collapse; background: #fff; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        button { background: #28a745; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 4px; }
+        button:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <h2>Danh Sách Người Dùng (User Service)</h2>
+    <button onclick="loadUsers()">Tải danh sách User</button>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Họ và Tên</th>
+                <th>Số Điện Thoại</th>
+                <th>Email</th>
+                <th>Số Dư (VND)</th>
+            </tr>
+        </thead>
+        <tbody id="userTableBody">
+            <tr><td colspan="5">Bấm nút trên để tải dữ liệu...</td></tr>
+        </tbody>
+    </table>
+
+    <script>
+        async function loadUsers() {
+            try {
+                const res = await fetch('http://localhost:3001/admin/users');
+                const result = await res.json();
+                
+                let html = '';
+                result.data.forEach(user => {
+                    html += `<tr>
+                        <td>${user.id}</td>
+                        <td>${user.fullName}</td>
+                        <td>${user.phone}</td>
+                        <td>${user.email}</td>
+                        <td>${user.balance.toLocaleString()} đ</td>
+                    </tr>`;
+                });
+                document.getElementById('userTableBody').innerHTML = html;
+            } catch (err) {
+                alert('Lỗi kết nối tới Backend server!');
+            }
+        }
+    </script>
+</body>
+</html>

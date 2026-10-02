@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+app.use(cors());
 const PORT = 3001;
 
 app.use(express.json());
@@ -64,6 +66,12 @@ app.delete('/admin/users/:id', (req, res) => {
     }
     const deletedUser = users.splice(userIndex, 1);
     res.status(200).json({ success: true, message: "Xóa người dùng thành công", data: deletedUser });
+});
+
+// Use Case: Quên mật khẩu
+app.post('/admin/users/forgot-password', (req, res) => {
+    const { email } = req.body;
+    res.status(200).json({ success: true, message: `Đã gửi mã khôi phục mật khẩu đến email ${email}` });
 });
 
 // Chạy server
