@@ -3,8 +3,6 @@ import os
 import jwt
 from fastapi import Depends, Header, HTTPException
 
-# QUAN TRỌNG: JWT_SECRET phải GIỐNG HỆT bên User Service (Trâm) và các service khác.
-# Cả nhóm thống nhất 1 giá trị thật rồi set qua biến môi trường, đừng để mặc định khi chạy thật.
 JWT_SECRET = os.environ.get("JWT_SECRET", "pawpay_dev_secret_doi_truoc_khi_nop")
 JWT_ALGORITHM = "HS256"
 
