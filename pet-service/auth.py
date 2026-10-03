@@ -3,7 +3,7 @@ import os
 import jwt
 from fastapi import Depends, Header, HTTPException
 
-JWT_SECRET = os.environ.get("JWT_SECRET", "pawpay_dev_secret_doi_truoc_khi_nop")
+JWT_SECRET = os.environ.get("JWT_SECRET", "pawpay2026_sgu_soa_secretkey")
 JWT_ALGORITHM = "HS256"
 
 
